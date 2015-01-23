@@ -1,0 +1,9 @@
+FROM busybox
+
+EXPOSE 5000
+
+ENV CODE=#CODE#
+
+CMD ["/app-server-errors"]
+
+ADD . /
