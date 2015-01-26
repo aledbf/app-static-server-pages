@@ -1,4 +1,4 @@
-FROM golang:1.4
+FROM golang:1.3
 
 CMD /go/bin/app-server-errors
 
@@ -10,6 +10,7 @@ WORKDIR /go/src/github.com/aledbf/app-server-errors
 
 ADD . /go/src/github.com/aledbf/app-server-errors
 
-RUN CGO_ENABLED=0 godep go build -a -ldflags '-s' /go/src/github.com/aledbf/app-server-errors/main.go
+RUN CGO_ENABLED=0 godep go build -a -ldflags '-s' .
 
-RUN cp main /go/bin/app-server-errors
+RUN cp app-server-errors /go/bin/app-server-errors
+

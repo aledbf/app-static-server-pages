@@ -10,6 +10,8 @@ import (
 )
 
 func main() {
+	http.HandleFunc("/status", serveStatus)
+	http.HandleFunc("/health-check", serveStatus)
 	http.HandleFunc("/", serveError)
 
 	port := os.Getenv("PORT")
@@ -21,6 +23,14 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func serveStatus(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	body := "OK"
+	w.Header().Set("Content-Length", fmt.Sprint(strconv.Itoa(len(body))))
+	w.WriteHeader(200)
+	w.Write([]byte(body))
 }
 
 func serveError(w http.ResponseWriter, r *http.Request) {
